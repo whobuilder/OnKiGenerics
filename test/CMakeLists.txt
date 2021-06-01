@@ -1,5 +1,4 @@
 find_package(Catch2 REQUIRED)
-find_package(FMT REQUIRED)
 include(Catch)
 
 add_executable(tests catch_main.cpp container_factory_tests.cpp
