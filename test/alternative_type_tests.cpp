@@ -1,5 +1,7 @@
 #include <catch2/catch.hpp>
 #include <OnKiGenerics/alternative_type.hpp>
+#include <vector>
+#include <list>
 
 TEST_CASE("No alternative is given", "[alternative_type]")
 {
