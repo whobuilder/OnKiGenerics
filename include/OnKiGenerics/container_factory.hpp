@@ -4,6 +4,7 @@
 #include <array>
 #include <type_traits>
 #include <OnKiGenerics/create_array.hpp>
+#include <OnKiGenerics/incremented_type.hpp>
 namespace onkigenerics {
 
 template<typename Container>
@@ -17,9 +18,9 @@ struct ContainerFactory
     }
 
     template<std::ptrdiff_t N, typename BaseContainer>
-    static Container create_with_incremented_size(BaseContainer &&base, value_type initial_value = value_type{})
+    static incremented_t<Container, N> create_with_incremented_size(BaseContainer &&base, value_type initial_value = value_type{})
     {
-        return Container(static_cast<std::size_t>(static_cast<std::ptrdiff_t>(base.size()) + N), initial_value);
+        return incremented_t<Container, N>(static_cast<std::size_t>(static_cast<std::ptrdiff_t>(base.size()) + N), initial_value);
     }
 };
 template<typename T, std::size_t N>
@@ -32,7 +33,7 @@ struct ContainerFactory<std::array<T, N>>
         return create_array<value_type, N>(initial_value);
     }
     template<std::ptrdiff_t Difference, typename BaseContainer>
-    static std::array<T, static_cast<std::size_t>(static_cast<std::ptrdiff_t>(N) + Difference)> create_with_incremented_size(BaseContainer &&, value_type initial_value = value_type{})
+    static incremented_t<std::array<T, N>, Difference> create_with_incremented_size(BaseContainer &&, value_type initial_value = value_type{})
     {
         return create_array<value_type, static_cast<std::size_t>(static_cast<std::ptrdiff_t>(N) + Difference)>(initial_value);
     }
