@@ -1,8 +1,9 @@
 find_package(Catch2 REQUIRED)
 include(Catch)
 
-add_executable(tests catch_main.cpp container_factory_tests.cpp
-                     is_std_array_tests.cpp create_array_tests.cpp)
+add_executable(
+  tests catch_main.cpp container_factory_tests.cpp is_std_array_tests.cpp
+        create_array_tests.cpp alternative_type_tests.cpp)
 
 target_link_libraries(tests PRIVATE project_warnings project_options
                                     OnKiGenerics::OnKiGenerics Catch2::Catch2)
