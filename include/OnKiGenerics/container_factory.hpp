@@ -4,13 +4,14 @@
 #include <array>
 #include <type_traits>
 #include <OnKiGenerics/create_array.hpp>
+#include <OnKiGenerics/remove_cvref.hpp>
 #include <OnKiGenerics/incremented_type.hpp>
 namespace onkigenerics {
 
 template<typename Container>
 struct ContainerFactory
 {
-    using value_type = std::remove_pointer_t<std::remove_reference_t<std::remove_cv_t<typename Container::value_type>>>;
+    using value_type = std::remove_pointer_t<onkigenerics::remove_cvref_t<typename Container::value_type>>;
 
     static Container create(std::size_t size, value_type initial_value = value_type{})
     {
@@ -26,7 +27,7 @@ struct ContainerFactory
 template<typename T, std::size_t N>
 struct ContainerFactory<std::array<T, N>>
 {
-    using value_type = std::remove_pointer_t<std::remove_reference_t<std::remove_cv_t<T>>>;
+    using value_type = std::remove_pointer_t<onkigenerics::remove_cvref_t<T>>;
 
     static std::array<T, N> create(std::size_t, value_type initial_value = value_type{})
     {
@@ -42,7 +43,7 @@ struct ContainerFactory<std::array<T, N>>
 template<typename T, std::size_t N>
 struct ContainerFactory<T[N]>
 {
-    using value_type = std::remove_pointer_t<std::remove_reference_t<std::remove_cv_t<T>>>;
+    using value_type = std::remove_pointer_t<onkigenerics::remove_cvref_t<T>>;
 
     static std::array<value_type, N> create(std::size_t, value_type initial_value = value_type{})
     {
