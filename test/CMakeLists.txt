@@ -10,7 +10,8 @@ add_executable(
   alternative_type_tests.cpp
   incremented_type_tests.cpp
   remove_cvref_tests.cpp
-  default_dynamic_container_tests.cpp)
+  default_dynamic_container_tests.cpp
+  default_container_tests.cpp)
 
 target_link_libraries(tests PRIVATE project_warnings project_options
                                     OnKiGenerics::OnKiGenerics Catch2::Catch2)
